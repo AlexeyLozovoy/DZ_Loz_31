@@ -6,6 +6,15 @@ from sqlalchemy.orm import Session
 class Base(DeclarativeBase):
     pass
 
+class Departments(Base):
+    __tablename__ = "Students" 
+    ID : Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    FirstName : Mapped[str] = mapped_column()
+    LastName : Mapped[str] = mapped_column()
+    Rating : Mapped[int] = mapped_column()
+    def __repr__(self) -> str:
+        return f"Student(ID={self.ID!r}, FirstName={self.FirstName!r}, LastName={self.LastName!r}, Rating={self.Rating!r})"
+    
 class Student(Base):
     __tablename__ = "Students" 
     ID : Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
@@ -14,8 +23,6 @@ class Student(Base):
     Rating : Mapped[int] = mapped_column()
     def __repr__(self) -> str:
         return f"Student(ID={self.ID!r}, FirstName={self.FirstName!r}, LastName={self.LastName!r}, Rating={self.Rating!r})"
-
-
 
 engine = create_engine("sqlite:///db.db")
 Base.metadata.drop_all(engine)
