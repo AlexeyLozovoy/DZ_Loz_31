@@ -46,19 +46,29 @@ class Teacher(Base):
         return f"Teacher(ID={self.ID!r}, FirstName={self.FirstName!r}, LastName={self.LastName!r}, EmploymentDate={self.EmploymentDate!r}, IsAssistant={self.IsAssistant!r}, IsProfessor={self.IsProfessor!r}, Position={self.Position!r}, Premium={self.Premium!r}, Salary={self.Salary!r})"
 
 engine = create_engine("sqlite:///db.db")
-Base.metadata.drop_all(engine)
+# Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
 with Session(engine) as session:
-    Student1 = Department(FirstName="Student1", LastName="1850", Rating=1)
-    Student2 = Student(FirstName="Student2", LastName="1850", Rating=2)
-    Student3 = Student(FirstName="Alexey", LastName="Lozovoy", Rating=3)
-    Student4 = Student(FirstName="Student4", LastName="1850", Rating=4)
-    Student5 = Student(FirstName="Student5", LastName="1850", Rating=5)
-    Student6 = Student(FirstName="Student6", LastName="1850", Rating=6)
-    Student7 = Student(FirstName="Student7", LastName="1850", Rating=7)
+    St1 = Department(Financing=10000, Name="Department1")
+    St2 = Department(Financing=20000, Name="Department2")
+    St3 = Department(Financing=30000, Name="Department3")
+    
+    St4 = Facultie(Dean="Dean1", Name="Facultie1")
+    St5 = Facultie(Dean="Dean2", Name="Facultie2")
+    St6 = Facultie(Dean="Dean3", Name="Facultie3")
 
-    session.add_all([Student1, Student2, Student3, Student4, Student5, Student6, Student7])
+    St7 = Group(Name="Group1", Rating=1, Year=1)
+    St8 = Group(Name="Group2", Rating=2, Year=2)
+    St9 = Group(Name="Group3", Rating=3, Year=3)
+
+    St10 = Teacher(FirstName = "Teacher1", LastName = "Teacher1", EmploymentDate = "2015-09-07", IsAssistant = 1, IsProfessor = 0,Position = "Position1", Premium = 100, Salary  = 1000)
+  
+    St11 = Teacher(FirstName = "Teacher2", LastName = "Teacher2", EmploymentDate = "2016-09-07", IsAssistant = 0, IsProfessor = 1,Position = "Position2", Premium = 200, Salary  = 2000)
+
+    St12 = Teacher(FirstName = "Teacher3", LastName = "Teacher3", EmploymentDate = "2017-09-07", IsAssistant = 0, IsProfessor = 0,Position = "Position3", Premium = 300, Salary  = 3000)
+
+    session.add_all([St1, St2, St3, St4, St5, St6, St7, St8, St9, St10, St11, St12])
     session.commit()
 
     # Student3.Rating = Student3.Rating +2
